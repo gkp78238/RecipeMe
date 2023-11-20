@@ -1,0 +1,39 @@
+.user-item a:hover,
+.user-item a:active {
+  background: #ffd900;
+}
+.user-item { display: flex;}
+
+.user-content {
+  padding: 0;
+}
+
+.user-img {
+  width: 100px;
+  height: 100px;
+  margin-right: 1rem;
+  border-radius: 25%;
+}
+
+
+.user-info h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
+  color: #52329c;
+  display: inline;
+}
+.user-info h3 {
+    margin: 0.2em 0;
+}
+
+.user-item:hover h2,
+.user-item:active h2,
+.user-item:hover h3,
+.user-item:active h3 {
+  color: #292929;
+}
+
+.user-item__info h3 {
+  margin: 0;
+}
