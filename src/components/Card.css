@@ -1,6 +1,70 @@
 .card {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background: #fae1dd; /* Soft pink background */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
 }
 
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-title {
+  color: #5c3c44; /* Dark mauve text for the title */
+  margin-bottom: 0.5rem;
+}
+
+.recipe-image {
+  background-color: #000; /* Placeholder for the checkerboard pattern */
+  width: 80px; /* Adjust size as needed */
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.ingredients-list {
+  list-style-type: none;
+  padding: 0;
+  color: #5c3c44; /* Dark mauve text for ingredients */
+}
+
+.ingredients-list li {
+  margin-bottom: 0.25rem;
+}
+
+.button {
+  background-color: #d99a9c; /* Pink button background */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  border: 1px solid #5c3c44; /* Border color to match the text */
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #b58385; /* A darker shade for hover */
+}
+
+.add-recipe-button {
+  background-color: #d99a9c; /* Pink button background */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.add-recipe-button:hover {
+  background-color: #b58385; /* A darker shade for hover */
+}
