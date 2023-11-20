@@ -5,3 +5,67 @@
     --light-item-peach: #edd8c8;
     --dark-item-orange: #efbea5; 
 }
+body {
+    background: var(--background-cream);
+    padding:0; 
+    margin:0; 
+    border: 0; 
+}
+.login-section{
+   height: 500 px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background: rgb(255,249,239,.75) url(../resources/kitchen-tools.jpg) repeat-x center center/contain ;
+}
+.login-container {
+    text-align:center;
+    width: 335px;
+    height: 302px;
+    padding: 10px;
+    margin:20px;
+    border: 2px solid var(--light-accent-clay);
+    flex-shrink: 0;
+    background-color:var(--light-item-peach) ;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+}
+.logo {
+    max-width: 75%;
+    height: auto;
+    margin-bottom: 2px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-color:var(--dark-accent-brown) ;
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--light-accent-clay); 
+}
+
+.login-button {
+    width: 35%;
+    padding: 10px;
+    background-color: var(--dark-accent-brown);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input::placeholder{ 
+    color:#fff;
+}
+#caption{
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
