@@ -1,0 +1,118 @@
+:root{ 
+    --dark-accent-brown: #543435; 
+    --light-accent-clay:#c07b72;
+    --background-cream:#fff9ef;
+    --light-item-peach: #edd8c8;
+    --dark-item-orange: #efbea5; 
+}
+body{
+    margin: 5;
+    padding: 0; 
+    border-radius: 0;
+    font-size: small;
+    color: #543435;
+font-family: Inter;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+.card {
+    max-width: 50%;
+    margin: 10px auto;
+    padding: 20px;
+    padding-top: 0px;
+    border-radius: 10px;
+    border: 1px solid #C07B72;
+    background: #FFF9EF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+}
+
+#Title{
+    margin: 5px;
+    grid-column: span 1;
+    text-align: center;
+    width: 100%; /* Ensures the title spans the entire card width */
+    padding:0;
+    color: #543435;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+
+.card-content {
+    margin: 8px;
+    width: 100%;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.circle-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 99px;
+    border: 1px solid #543435;
+}
+.description{
+    width: 259px;
+    height: 62px;
+    flex-shrink: 0;
+    text-align: center;
+    border: solid 1px var(--light-accent-clay)  ;
+    border-radius: 5px;
+    margin:0;
+    color: #543435;
+
+text-align: center;
+font-family: Inter;
+font-size: 10px;
+font-style: normal;
+font-weight: 200;
+line-height: normal;
+}
+button{
+    width: 85px;
+    height: 44px;
+    flex-shrink: 0;
+    color: #FFF9EF;
+    border: 3px solid #FFF9EF;
+    border-radius: 10px;
+background: #C07B72;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin:5; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+#List Lable {
+margin: 0; 
+padding: 0; 
+
+}
+
+.Ingredient-List{
+    max-width: 100%;
+    padding-left: 20px;
+    text-align: left;
+    color: #543435;
+
+font-family: Inter;
+font-size: 10px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+}
+#List-Lable{
+    text-align: Left;
+}
+.ingredients{
+   
+}
