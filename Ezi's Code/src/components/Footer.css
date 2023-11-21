@@ -1,0 +1,31 @@
+.footer {
+  background-color: #543435; 
+  padding: 10px 0; 
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+  margin-top: 20px;
+  height: 35px;
+}
+
+.footer-content {
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem; 
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+}
+
+.footer {
+  padding: 20px;
+  background-color: #8B4513; 
+  text-align: center;
+  color: white;
+}

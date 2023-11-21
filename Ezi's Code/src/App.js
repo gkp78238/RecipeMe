@@ -6,6 +6,7 @@ import Card from './components/Card';
 import UsersList from './components/UsersList';
 import SearchList from './components/SearchList';
 import axios from 'axios';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -129,7 +130,9 @@ function App() {
       <div style={{display: 'flex'}}>
         <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} />
         <UsersList isAuth={loggedIn} items={users} />
+      
       </div>
+      <Footer/>
     </div>
   );
 }
