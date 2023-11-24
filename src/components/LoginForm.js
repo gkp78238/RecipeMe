@@ -1,6 +1,7 @@
 
 import './LoginForm.css';
 import React, { useState } from 'react';
+import logoImage from '../resources/logo (2).png';
 
 const LoginForm = (props) => {
   const [username, setUsername] = useState('');
@@ -23,7 +24,8 @@ const LoginForm = (props) => {
         <button className="close-button" onClick={props.onClose}>
           X
         </button>
-        <img src="src/resources/logo (2).png" alt="Logo" className="logo" />
+        <img src={logoImage} alt="Logo" className="logo" />
+
         <p id="caption">
           Sign in to generate your own recipe book using only what you have in your kitchen!
         </p>
