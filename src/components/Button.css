@@ -10,8 +10,7 @@
 
 .button:hover,
 .button:active {
-  background: #881111;
-  border-color: #881111;
+
 }
 
 .button:focus {

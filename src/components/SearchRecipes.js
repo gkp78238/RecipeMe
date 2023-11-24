@@ -36,18 +36,18 @@ const SearchRecipes = (props) => {
   };
 
   return (
-    <Card className="input">
-      <form onSubmit={submitHandler}>
-        <label>Ingredients to Include (e.g. "Apples, Flour, Sugar")</label>
+    <div className="search-bar">
+         <p id= "search-inst">Ingredients to Include (e.g. "Apples, Flour, Sugar")</p>
+      <form id="search-form" onSubmit={submitHandler}>
          <input
           id="major"
           type="text"
           value={enteredMajor}
           onChange={majorChangeHandler}
         />
-        <Button type="submit">Search Recipes with Ingredient(s)</Button>
+        <Button id="search-button" type="submit">Search Recipes</Button>
       </form>
-    </Card>
+    </div>
   );
 };
 

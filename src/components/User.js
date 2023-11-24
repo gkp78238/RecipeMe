@@ -14,6 +14,7 @@ const User = props => {
                     <h4 id="List-Label">Ingredients:</h4>
                     <p className = "ingredient">{props.major}</p>
                 </div>
+
             </div>
         </div>
     );

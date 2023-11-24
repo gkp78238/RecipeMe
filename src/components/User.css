@@ -6,7 +6,8 @@
   --dark-item-orange: #efbea5;
 }
 
-body {
+
+.card {
   margin: 0;
   padding: 0;
   border-radius: 0;
@@ -16,15 +17,12 @@ body {
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-}
-
-.card {
   margin:5px;
   width: 100%; /* Change max-width to width */
   padding: 5px;
   padding-top: 0px;
   border-radius: 10px;
-  border: 1px solid #c07b72;
+  border: 3px solid #c07b72;
   background: #fff9ef;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -44,11 +42,11 @@ body {
 }
 
 .card-content {
-  margin:0;
+  margin:5px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .circle-image {
@@ -56,11 +54,13 @@ body {
   height: 100px;
   border-radius: 99px;
   border: 1px solid #543435;
-  margin:5px;
+  margin-right:10px;
 }
 
 .description {
-  width: 75%; /* Change fixed width to 100% */
+  margin: 10px;
+  width: 200px; 
+  flex-shrink: 0;
   height: 62px;
   text-align: center;
   border: solid 1px var(--light-accent-clay);
@@ -107,6 +107,7 @@ button {
   padding: 0;
 }
 .ingredient-section{
-  margin-left:10px;
+  max-width: min-content;
+  margin-left:15px;
   padding:0;
 }
