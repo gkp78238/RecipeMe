@@ -52,6 +52,7 @@ const LoginForm = (props) => {
             Login
           </button>
         </form>
+        
       </div>
     </section>
   );

@@ -1,18 +1,21 @@
+
 .users {
-    flex: 45%;
-    padding: 10px;
-    margin: 2rem auto;
-    width: 90%;
-    max-width: 35rem;
-  }
-  
-  .users ul {
-    list-style: none;
-    padding: 1rem;
-  }
-  
-  .users li {
-    border: 1px solid #ccc;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-  }
+  flex: 100%; /* Change flex to 100% */
+  padding: 10px;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 35rem;
+}
+
+.users ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+.users li {
+  width: 100%; /* Change to 100% */
+  box-sizing: border-box; /* Add box-sizing property */
+  border: 1px solid #ccc;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
