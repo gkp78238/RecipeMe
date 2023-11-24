@@ -1,11 +1,11 @@
+// Hdr.js
 import React, { useState } from 'react';
 import Button from '../../src/components/Button';
 import LoginForm from './LoginForm';
 import './Hdr.css';
 
-const Hdr = () => {
+const Hdr = ({ isAuth, onLoginSuccess, onLogout }) => {
   const [showLogin, setShowLogin] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
 
   const loginButtonHandler = () => {
     setShowLogin(true);
@@ -16,13 +16,13 @@ const Hdr = () => {
   };
 
   const loginSuccessHandler = () => {
-    setIsAuth(true);
+    onLoginSuccess(true);
     setShowLogin(false);
   };
 
   const signOutHandler = () => {
-    setIsAuth(false);
-    // Additional logic for sign-out, if needed
+    onLogout(false);
+   
   };
 
   return (
