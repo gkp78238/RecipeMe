@@ -69,3 +69,11 @@ input::placeholder{
     line-height: normal;
 
 }
+.close-button{
+    color:#fff;
+    background-color: var(--dark-accent-brown);
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    
+}
