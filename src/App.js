@@ -29,7 +29,7 @@ function App() {
   ];
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState(initialSearch);
   const [users, setUsers] = useState([]);
 
   const saveRecipeHandler = (entryData) => {
