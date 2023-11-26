@@ -1,4 +1,3 @@
-
 import './LoginForm.css';
 import React, { useState } from 'react';
 import logoImage from '../resources/logo (2).png';
@@ -9,13 +8,11 @@ const LoginForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    // Perform your login logic here
-    // For simplicity, assume login is successful
-    // In a real application, you would check credentials and perform authentication
-
-    // Assuming the login is successful, call the callback function
     props.onLoginSuccess();
+  };
+
+  const handleSignUp = () => {
+    console.log("Sign Up Clicked"); 
   };
 
   return (
@@ -48,11 +45,16 @@ const LoginForm = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <button type="submit" className="login-button">
+              Login
+            </button>
+            {}
+            <button type="button" className="login-button" onClick={handleSignUp}>
+              Sign Up
+            </button>
+          </div>
         </form>
-        
       </div>
     </section>
   );
