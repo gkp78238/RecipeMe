@@ -70,10 +70,24 @@ input::placeholder{
 
 }
 .close-button{
-    color:#fff;
+    color: #fff;
     background-color: var(--dark-accent-brown);
     position: absolute; 
     top: 10px;
     right: 10px;
-    
+    font-size: 12px; /* Adjusted for smaller 'X' text */
+    width: 20px; /* Adjusted for a smaller button */
+    height: 20px; /* Adjusted for a smaller button */
+    line-height: 20px; /* To center the 'X' vertically */
+    padding: 0; /* Adjust padding as needed */
+    border-radius: 50%; /* Optional: if you want the button to be round */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default; /* Default cursor */
 }
+
+.close-button:hover {
+    cursor: pointer; /* Changes cursor to a pointer hand when hovering */
+}
+
