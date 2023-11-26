@@ -37,7 +37,7 @@ const SearchList = (props) => {
                                 img={result.img}
                                 major={result.major}
                                 />
-                                <Button 
+                                <Button className = "add-button"
                                 id={Math.random.toString()}
                                 name={result.username}
                                 img={result.img}
