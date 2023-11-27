@@ -32,7 +32,7 @@ line-height: normal;
     margin: 5px;
     grid-column: span 1;
     text-align: center;
-    width: 100%; /* Ensures the title spans the entire card width */
+    width: 100%; 
     padding:0;
     color: #543435;
 font-family: Inter;
