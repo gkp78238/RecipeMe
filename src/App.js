@@ -73,11 +73,11 @@ function App() {
       }
     };
 
-   // Function to extract used ingredients and create a string
+   // Function to extract used ingredients(from search) and the other ingredients needed for a recipe and create a string
    function getDescriptionString(recipe) {
   const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.original);
   const unusedIngredients = recipe.missedIngredients.map(ingredient => ingredient.original); 
-  return usedIngredients.concat(unusedIngredients).join(', ');
+  return usedIngredients.concat(unusedIngredients).join('•  ');
 }
 function getUsedIngredientsString(recipe) {
   const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.name);
