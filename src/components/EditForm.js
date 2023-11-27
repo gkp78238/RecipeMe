@@ -1,4 +1,4 @@
-
+// EditForm.js
 import React, { useState } from 'react';
 import './EditForm.css';
 
@@ -22,7 +22,6 @@ const EditForm = ({ user, onUpdate, onCancel }) => {
           &times;
         </span>
         <form onSubmit={handleSubmit}>
-          {/* Add your input fields here */}
           <label>
             Name:
             <input type="text" name="name" value={editedUser.name} onChange={handleChange} />
@@ -50,4 +49,3 @@ const EditForm = ({ user, onUpdate, onCancel }) => {
 };
 
 export default EditForm;
-

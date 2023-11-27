@@ -14,13 +14,16 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;
   }
   
   .modal {
-    background: white;
+    background: var(--background-cream);
+    border: 3px solid var(--light-accent-clay);
+    border-radius: 5px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -32,5 +35,20 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
+
   }
-  
+  input{
+    padding: 8px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+  }
+  .formBtn{
+    color: var(--background-cream); 
+    background: #543435;
+    border-radius: 3px;
+  }

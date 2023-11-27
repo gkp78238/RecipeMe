@@ -44,7 +44,7 @@ body {
     box-sizing: border-box;
     border-color:var(--dark-accent-brown) ;
     border-radius: 5px;
-    color: #fff;
+    color: var(--background-cream);
     background-color: var(--light-accent-clay); 
 }
 
@@ -52,7 +52,7 @@ body {
     width: 35%;
     padding: 10px;
     background-color: var(--dark-accent-brown);
-    color: #fff;
+    color: var(--background-cream);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -60,7 +60,7 @@ input::placeholder{
     color:#fff;
 }
 #caption{
-    color: #000;
+    color: var(--dark-accent-brown);
     text-align: center;
     font-family: Inter;
     font-size: 10px;
@@ -70,7 +70,7 @@ input::placeholder{
 
 }
 .close-button{
-    color: #fff;
+    color: var(--background-cream);
     background-color: var(--dark-accent-brown);
     position: absolute; 
     top: 10px;

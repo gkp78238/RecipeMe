@@ -5,7 +5,7 @@ import Hdr from './components/Hdr';
 import UsersList from './components/UsersList';
 import SearchList from './components/SearchList';
 import axios from 'axios';
-
+import EditForm from './components/EditForm';
 function App() {
   const initialSearch = [
     {
@@ -34,6 +34,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [search, setSearch] = useState(initialSearch);
   const [users, setUsers] = useState([]);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
 
   const saveRecipeHandler = (entryData) => {
     const recipeInQuestion = search.find(({ username }) => username === entryData.name);
@@ -56,6 +58,25 @@ function App() {
   const loginHandler = () => {
     setLoggedIn((prevLoggedIn) => !prevLoggedIn);
   };
+        // Function to open the edit form with the user ID
+        const openEditForm = (userId) => {
+          setShowEditForm(true);
+          setEditUserId(userId);
+        };
+      
+        // Function to close the edit form
+        const closeEditForm = () => {
+          setShowEditForm(false);
+          setEditUserId(null);
+        };
+      
+        // Function to handle updating a user's information in the state
+        const handleUpdateUser = (updatedUser) => {
+          setUsers((prevUsers) =>
+            prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
+          );
+          closeEditForm();
+        };
 
   const searchHandler = (enteredUserData) => {
     const options = {
@@ -72,6 +93,7 @@ function App() {
         'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
       }
     };
+
 
    // Function to extract used ingredients(from search) and the other ingredients needed for a recipe and create a string
    function getDescriptionString(recipe) {
@@ -94,6 +116,7 @@ function getUsedIngredientsString(recipe) {
         major: usedIngredients,
         age: description
       };
+    
     };
 
     axios
@@ -101,30 +124,36 @@ function getUsedIngredientsString(recipe) {
       .then((response) => {
         setSearch(response.data.map((result) => formatSearch(result)));
       })
-      .catch((error) => console.error(error));
-  };
-
-  return (
-    <div>
-      <Hdr isAuth={loggedIn} onLoginSuccess={loginHandler} onLogout={loginHandler} />
-      {loggedIn ? (
-        <>
-          <SearchRecipes onSearchWithIngredients={searchHandler} />
-          <div style={{ display: 'flex' }}>
-            <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} />
-            <UsersList isAuth={loggedIn} items={users} />
-          </div>
-        </>
-      ) : (
-        <>
-          <div style={{ display: 'flex' }}>
-            <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} />
-            <UsersList isAuth={loggedIn} items={users} />
-          </div>
-        </>
-      )}
-    </div>
-  );
+      .catch((error) => console.error(error)); 
+    }; 
+    return (
+      <div>
+        <Hdr isAuth={loggedIn} onLoginSuccess={() => setLoggedIn(true)} onLogout={() => setLoggedIn(false)} />
+        {loggedIn ? (
+          <>
+            <SearchRecipes onSearchWithIngredients={searchHandler} />
+            <div style={{ display: 'flex' }}>
+              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
+            </div>
+            {showEditForm && (
+              <EditForm
+                user={users.find((user) => user.id === editUserId)}
+                onUpdate={handleUpdateUser}
+                onCancel={closeEditForm}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            <div style={{ display: 'flex' }}>
+              <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
+            </div>
+          </>
+        )}
+      </div>
+    );
 }
 
 export default App;

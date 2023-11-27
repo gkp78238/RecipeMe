@@ -43,7 +43,7 @@ const UsersList = (props) => {
                 img={user.img}
                 major={user.major}
                 age={user.age}
-                onEdit={handleEditClick} // Pass the onEdit callback to User component
+                onEdit={() => handleEditClick(user.id)} // Pass the onEdit callback to User component
                 onUpdate={handleUpdateUser} // Pass the onUpdate callback to User component
               />
               <Button id={user.id} type="button" onClick={() => handleRemoveClick(user.id)}>
