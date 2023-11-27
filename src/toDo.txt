@@ -9,7 +9,7 @@ Must Do:
     - the other choice would be when we add it to the pantry, the description and ingredients become a text field, and all of the ingredients needed become displayed on the side 
     - here is the way the API response is formatted: https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 4) Make the search bar work better  (have it display and save what ingredients you've put in so far like the figma model?) 
-5) make sure the cookbook saves when you log in and out 
+5) make sure the cookbook saves when you log in and out, will involve setting the cookbok to be stored on user profile
 
 Optional:
 1) Put the recipe book and search on separate pages 
