@@ -4,6 +4,7 @@ import AddUser from './SearchRecipes';
 import './UsersList.css';
 import Card from './Card';
 import Button from './Button';
+import divider from '../resources/Divider.png';
 
 const SearchList = (props) => {
 
@@ -26,7 +27,7 @@ const SearchList = (props) => {
     return (
             <Card className="users">
                 <>
-                    <p style={{fontSize: '2rem',color: '#292929',display: 'inline',textDecoration: 'underline',fontWeight: 'bold'}}>Recipe Results</p>
+                    <img src = {divider} alt = "browse recipes" className="divider"></img>
                     {props.items.map((result) => {
                         console.log(result.name);
                         return (
@@ -55,7 +56,7 @@ const SearchList = (props) => {
         return (
             <Card className="users">
                 <>
-                    <p style={{fontSize: '2rem',color: '#292929',display: 'inline',textDecoration: 'underline',fontWeight: 'bold'}}>Recipe Results</p>
+                <img src = {divider} alt = "browse recipes" className="divider"></img>
                     {props.items.map((result) => {
                         console.log(result);
                         return (

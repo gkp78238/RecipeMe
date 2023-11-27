@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from './Card';
 import Button from './Button';
 import './SearchRecipes.css';
+import divider from '../resources/Divider.png';
 
 const SearchRecipes = (props) => {
   const [enteredName, setEnteredName] = useState('');
