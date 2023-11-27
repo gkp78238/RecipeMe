@@ -28,7 +28,7 @@ const SearchRecipes = (props) => {
       return;
     }
 
-    const userData = enteredMajor
+    const userData = enteredMajor;
 
     console.log(userData);
 
@@ -38,8 +38,10 @@ const SearchRecipes = (props) => {
 
   return (
     <div className="search-bar">
-         <p id= "search-inst">Ingredients to Include (e.g. "Apples, Flour, Sugar")</p>
-      <form id="search-form" onSubmit={submitHandler}>
+         <p id= "search-inst">Instructions: Type your Ingredients to Include in the recipe separated by commas!
+          (e.g. "Apples, Flour, Sugar")</p>
+      <div id="search form">
+      <form onSubmit={submitHandler}>
          <input
           id="major"
           type="text"
@@ -48,6 +50,7 @@ const SearchRecipes = (props) => {
         />
         <Button id="search-button" type="submit">Search Recipes</Button>
       </form>
+      </div>
     </div>
   );
 };

@@ -45,11 +45,6 @@ background-color: #543435;
 .search-bar{
   margin:5px;
   padding:20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-height: fit-content;
-width: fit-content;
 border-radius: 10px;
   text-align: center;
   background-color: var(--background-cream);

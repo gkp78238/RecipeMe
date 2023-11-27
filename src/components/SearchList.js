@@ -15,6 +15,7 @@ const SearchList = (props) => {
             name: event.currentTarget.name,
             img: event.currentTarget.img,
             major: event.currentTarget.major,
+            age: event.currentTarget.age,
         }
 
         console.log(entryData);
@@ -37,12 +38,14 @@ const SearchList = (props) => {
                                 name={result.username}
                                 img={result.img}
                                 major={result.major}
+                                age= {result.age}
                                 />
                                 <Button className = "add-button"
                                 id={Math.random.toString()}
                                 name={result.username}
                                 img={result.img}
                                 major={result.major}
+                                age={result.age}
                                 onClick={addToPantryHandler}
                                 >Add to Pantry</Button>
                             </>
@@ -66,6 +69,7 @@ const SearchList = (props) => {
                                 name={result.username}
                                 img={result.img}
                                 major={result.major}
+                                age = {result.age}
                                 />
                             </>
                             )

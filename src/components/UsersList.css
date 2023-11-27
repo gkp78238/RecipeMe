@@ -1,3 +1,10 @@
+:root {
+  --dark-accent-brown: #543435;
+  --light-accent-clay: #c07b72;
+  --background-cream: #fff9ef;
+  --light-item-peach: #edd8c8;
+  --dark-item-orange: #efbea5;
+}
 
 .users {
   flex: 100%; /* Change flex to 100% */
@@ -5,7 +12,8 @@
   margin: 2rem auto;
   width: 90%;
   max-width: 35rem;
-  background-color: #EFBEA5;
+  background-color: var(--dark-item-orange);
+  border: 3px solid var(--light-accent-clay);
 }
 
 .users ul {
@@ -17,7 +25,7 @@
 .users li {
   width: 100%; /* Change to 100% */
   box-sizing: border-box; /* Add box-sizing property */
-  border: 1px solid #ccc;
+  border: 1px solid var(--background-cream);
   margin: 0.5rem 0;
   padding: 0.5rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);

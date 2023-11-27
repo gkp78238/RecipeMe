@@ -12,17 +12,20 @@ function App() {
       username: 'Black Bean Chocolate Cake',
       img: 'https://www.mysugarfreekitchen.com/wp-content/uploads/2021/02/Chocolate-Black-Bean-Cake-Makeover-20.jpg',
       major: 'Black Beans, Devils Food Cake Mix',
+      age: '15  ounces of unseasoned black beans, 5 large eggs,  1 tablespoon pure vanilla extract, .5 teaspoon sea salt, 6 tablespoons coconut oil .5 cup honey 6 tablespoons dark Dutch-processed cocoa powder 1  teaspoon aluminum-free baking powder .5 teaspoon baking soda ', 
       id: Math.random().toString()
     },
     {
       username: 'Cheesy Mexican Nacho Stacks',
       img: 'https://spoonacular.com/recipeImages/590388-312x231.jpg',
+      age: 'chips, cheese, black beans, tomatoes',
       major: 'Tortilla Chips, Black Beans, Shreaded Cheese',
       id: Math.random().toString()
     },
     {
       username: 'Refried Black Bean Cakes',
       img: 'https://spoonacular.com/recipeImages/263116-312x231.jpg',
+      age: 'refied black beans,',
       major: 'Black Beans, Cornmeal',
       id: Math.random().toString()
     }
@@ -37,11 +40,12 @@ function App() {
 
     const newImage = recipeInQuestion.img;
     const newIngredients = recipeInQuestion.major;
-
+    const newDescription = recipeInQuestion.age; 
     const userData = {
       username: entryData.name,
       img: newImage,
       major: newIngredients,
+      age: newDescription,
       id: Math.random().toString()
     };
 
@@ -69,15 +73,26 @@ function App() {
       }
     };
 
+   // Function to extract used ingredients and create a string
+   function getDescriptionString(recipe) {
+  const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.original);
+  const unusedIngredients = recipe.missedIngredients.map(ingredient => ingredient.original); 
+  return usedIngredients.concat(unusedIngredients).join(', ');
+}
+function getUsedIngredientsString(recipe) {
+  const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.name);
+  return usedIngredients.join(', ');
+}
     const formatSearch = (result) => {
       const foodname = result.title;
       const image = result.image;
-      const ingredients = result.usedIngredients + ', ' + result.missedIngredients;
-
+      const description= getDescriptionString(result);
+      const usedIngredients = getUsedIngredientsString(result);
       return {
         username: foodname,
         img: image,
-        major: ingredients
+        major: usedIngredients,
+        age: description
       };
     };
 

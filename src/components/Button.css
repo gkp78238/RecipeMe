@@ -1,7 +1,14 @@
+:root{ 
+  --dark-accent-brown: #543435; 
+  --light-accent-clay:#c07b72;
+  --background-cream:#fff9ef;
+  --light-item-peach: #edd8c8;
+  --dark-item-orange: #efbea5; 
+}
 .button {
   font: inherit;
-  border: 1px solid #5f0000;
-  background: #5f0000;
+  border: 1px solid var(--light-accent-clay);
+  background: var(--dark-accent-brown);
   color: white;
   padding: 0.25rem 1rem;
   cursor: pointer;

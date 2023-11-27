@@ -19,6 +19,7 @@ const UsersList = (props) => {
                                 name={user.username}
                                 img={user.img}
                                 major={user.major}
+                                age = {user.age}
                                 />
                                 <Button id={Math.random.toString()} type="submit">Edit</Button>
                                 <Button id={Math.random.toString()} type="submit">Remove</Button>
