@@ -10,7 +10,7 @@ const Button = (props) => {
       id={Math.random.toString()}
       name={props.name}
       img={props.img}
-      major={props.major}
+      ingredients={props.ingredients}
       onClick={props.onClick}
     >
       {props.children}

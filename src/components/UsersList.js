@@ -41,8 +41,8 @@ const UsersList = (props) => {
                 id={user.id}
                 name={user.username}
                 img={user.img}
-                major={user.major}
-                age={user.age}
+                ingredients={user.ingredients}
+                description={user.description}
                 onEdit={() => handleEditClick(user.id)} // Pass the onEdit callback to User component
                 onUpdate={handleUpdateUser} // Pass the onUpdate callback to User component
               />

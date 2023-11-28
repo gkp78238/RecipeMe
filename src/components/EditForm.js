@@ -27,12 +27,12 @@ const EditForm = ({ user, onUpdate, onCancel }) => {
             <input type="text" name="name" value={editedUser.name} onChange={handleChange} />
           </label>
           <label>
-            Age:
-            <input type="text" name="age" value={editedUser.age} onChange={handleChange} />
+            Description:
+            <input type="text" name="description" value={editedUser.description} onChange={handleChange} />
           </label>
           <label>
-            Major:
-            <input type="text" name="major" value={editedUser.major} onChange={handleChange} />
+            Ingredients List:
+            <input type="text" name="ingredients" value={editedUser.ingredients} onChange={handleChange} />
           </label>
           <label>
             Image URL:

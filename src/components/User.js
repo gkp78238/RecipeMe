@@ -23,13 +23,13 @@ const User = (props) => {
         <div>
           <h4 id="List-Label">Description</h4>
           <section className="description">
-            <p>{props.age}</p>
+            <p>{props.description}</p>
           </section>
         </div>
 
         <div className="ingredient-section">
           <h4 id="List-Label">Ingredients Used:</h4>
-          <p className="ingredient">{props.major}</p>
+          <p className="ingredient">{props.ingredients}</p>
         </div>
 
         {props.onEdit && (

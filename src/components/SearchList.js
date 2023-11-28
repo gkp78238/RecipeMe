@@ -14,8 +14,8 @@ const SearchList = (props) => {
         const entryData = {
             name: event.currentTarget.name,
             img: event.currentTarget.img,
-            major: event.currentTarget.major,
-            age: event.currentTarget.age,
+            ingredients: event.currentTarget.ingredients,
+            description: event.currentTarget.description,
         }
 
         console.log(entryData);
@@ -37,15 +37,15 @@ const SearchList = (props) => {
                                 id={result.id}
                                 name={result.username}
                                 img={result.img}
-                                major={result.major}
-                                age= {result.age}
+                                ingredients={result.ingredients}
+                                description= {result.description}
                                 />
                                 <Button className = "add-button"
                                 id={Math.random.toString()}
                                 name={result.username}
                                 img={result.img}
-                                major={result.major}
-                                age={result.age}
+                                ingredients={result.ingredients}
+                                description={result.description}
                                 onClick={addToPantryHandler}
                                 >Add to Pantry</Button>
                             </>
@@ -68,8 +68,8 @@ const SearchList = (props) => {
                                 id={result.id}
                                 name={result.username}
                                 img={result.img}
-                                major={result.major}
-                                age = {result.age}
+                                ingredients={result.ingredients}
+                                description = {result.description}
                                 />
                             </>
                             )

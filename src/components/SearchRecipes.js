@@ -43,7 +43,7 @@ const SearchRecipes = (props) => {
       <div id="search form">
       <form onSubmit={submitHandler}>
          <input
-          id="major"
+          id="ingredients"
           type="text"
           value={enteredMajor}
           onChange={majorChangeHandler}
