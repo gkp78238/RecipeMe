@@ -38,7 +38,7 @@ const SearchRecipes = (props) => {
 
   return (
     <div className="search-bar">
-         <p id= "search-inst">Instructions: Type your Ingredients to Include in the recipe separated by commas!
+         <p id= "search-inst">Instructions: Type a comma-separated list of ingredients to include them in your recipe search
           (e.g. "Apples, Flour, Sugar")</p>
       <div id="search form">
       <form onSubmit={submitHandler}>
