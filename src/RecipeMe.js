@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import SearchRecipes from './components/SearchRecipes';
 import Hdr from './components/Hdr';
@@ -13,13 +12,13 @@ function RecipeMe() {
       username: 'Black Bean Chocolate Cake',
       img: 'https://www.mysugarfreekitchen.com/wp-content/uploads/2021/02/Chocolate-Black-Bean-Cake-Makeover-20.jpg',
       ingredients: 'Black Beans, Devils Food Cake Mix',
-      description: 'This black bean cake is full of fibre, easy to make for beginner bakers with simple ingredients.  Best of off, its naturally sweetened with no added sugar, has a little hit of coffee with thick luscious sugar free frosting.  ', 
+      description: 'This black bean cake is full of fibre, easy to make for beginner bakers with simple ingredients. Best of off, its naturally sweetened with no added sugar, has a little hit of coffee with thick luscious sugar free frosting.', 
       id: Math.random().toString()
     },
     {
       username: 'Cheesy Mexican Nacho Stacks',
       img: 'https://spoonacular.com/recipeImages/590388-312x231.jpg',
-      description: 'Nachos loaded with melted shredded cheese, black beans, and all your favorite toppings! ',
+      description: 'Nachos loaded with melted shredded cheese, black beans, and all your favorite toppings!',
       ingredients: 'Tortilla Chips, Black Beans, Shredded Cheese',
       id: Math.random().toString()
     },
@@ -59,25 +58,27 @@ function RecipeMe() {
   const loginHandler = () => {
     setLoggedIn((prevLoggedIn) => !prevLoggedIn);
   };
-        // Function to open the edit form with the user ID
-        const openEditForm = (userId) => {
-          setShowEditForm(true);
-          setEditUserId(userId);
-        };
-      
-        // Function to close the edit form
-        const closeEditForm = () => {
-          setShowEditForm(false);
-          setEditUserId(null);
-        };
-      
-        // Function to handle updating a user's information in the state
-        const handleUpdateUser = (updatedUser) => {
-          setUsers((prevUsers) =>
-            prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
-          );
-          closeEditForm();
-        };
+
+  const removeUserHandler = (userId) => {
+    setUsers((prevUsers) => prevUsers.filter(user => user.id !== userId));
+  };
+
+  const openEditForm = (userId) => {
+    setShowEditForm(true);
+    setEditUserId(userId);
+  };
+
+  const closeEditForm = () => {
+    setShowEditForm(false);
+    setEditUserId(null);
+  };
+
+  const handleUpdateUser = (updatedUser) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
+    );
+    closeEditForm();
+  };
 
   const searchHandler = (enteredUserData) => {
     const options = {
@@ -95,17 +96,18 @@ function RecipeMe() {
       }
     };
 
+    // Function to extract used ingredients(from search) and the other ingredients needed for a recipe and create a string
+    function getDescriptionString(recipe) {
+      const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.original);
+      const unusedIngredients = recipe.missedIngredients.map(ingredient => ingredient.original); 
+      return usedIngredients.concat(unusedIngredients).join('•  ');
+    }
 
-   // Function to extract used ingredients(from search) and the other ingredients needed for a recipe and create a string
-   function getDescriptionString(recipe) {
-  const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.original);
-  const unusedIngredients = recipe.missedIngredients.map(ingredient => ingredient.original); 
-  return usedIngredients.concat(unusedIngredients).join('•  ');
-}
-function getUsedIngredientsString(recipe) {
-  const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.name);
-  return usedIngredients.join(', ');
-}
+    function getUsedIngredientsString(recipe) {
+      const usedIngredients = recipe.usedIngredients.map(ingredient => ingredient.name);
+      return usedIngredients.join(', ');
+    }
+
     const formatSearch = (result) => {
       const foodname = result.title;
       const image = result.image;
@@ -117,7 +119,6 @@ function getUsedIngredientsString(recipe) {
         ingredients: usedIngredients,
         description: description
       };
-    
     };
 
     axios
@@ -126,35 +127,37 @@ function getUsedIngredientsString(recipe) {
         setSearch(response.data.map((result) => formatSearch(result)));
       })
       .catch((error) => console.error(error)); 
-    }; 
-    return (
-      <div>
-        <Hdr isAuth={loggedIn} onLoginSuccess={() => setLoggedIn(true)} onLogout={() => setLoggedIn(false)} />
-        {loggedIn ? (
-          <>
-            <SearchRecipes onSearchWithIngredients={searchHandler} />
-            <div style={{ display: 'flex' }}>
-              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
-            </div>
-            {showEditForm && (
-              <EditForm
-                user={users.find((user) => user.id === editUserId)}
-                onUpdate={handleUpdateUser}
-                onCancel={closeEditForm}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            <div style={{ display: 'flex' }}>
-              <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
-            </div>
-          </>
-        )}
-      </div>
-    );
+  }; 
+
+  return (
+    <div>
+      <Hdr isAuth={loggedIn} onLoginSuccess={() => setLoggedIn(true)} onLogout={() => setLoggedIn(false)} />
+      {loggedIn ? (
+        <>
+          <SearchRecipes onSearchWithIngredients={searchHandler} />
+          <div style={{ display: 'flex' }}>
+            <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
+          </div>
+          {showEditForm && (
+            <EditForm
+              user={users.find((user) => user.id === editUserId)}
+              onUpdate={handleUpdateUser}
+              onCancel={closeEditForm}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <div style={{ display: 'flex' }}>
+            <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default RecipeMe;
+
