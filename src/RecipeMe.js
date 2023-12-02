@@ -13,20 +13,20 @@ function RecipeMe() {
       username: 'Black Bean Chocolate Cake',
       img: 'https://www.mysugarfreekitchen.com/wp-content/uploads/2021/02/Chocolate-Black-Bean-Cake-Makeover-20.jpg',
       ingredients: 'Black Beans, Devils Food Cake Mix',
-      description: '15  ounces of unseasoned black beans, 5 large eggs,  1 tablespoon pure vanilla extract, .5 teaspoon sea salt, 6 tablespoons coconut oil .5 cup honey 6 tablespoons dark Dutch-processed cocoa powder 1  teaspoon aluminum-free baking powder .5 teaspoon baking soda ', 
+      description: 'This black bean cake is full of fibre, easy to make for beginner bakers with simple ingredients.  Best of off, its naturally sweetened with no added sugar, has a little hit of coffee with thick luscious sugar free frosting.  ', 
       id: Math.random().toString()
     },
     {
       username: 'Cheesy Mexican Nacho Stacks',
       img: 'https://spoonacular.com/recipeImages/590388-312x231.jpg',
-      description: 'chips, cheese, black beans, tomatoes',
-      ingredients: 'Tortilla Chips, Black Beans, Shreaded Cheese',
+      description: 'Nachos loaded with melted shredded cheese, black beans, and all your favorite toppings! ',
+      ingredients: 'Tortilla Chips, Black Beans, Shredded Cheese',
       id: Math.random().toString()
     },
     {
       username: 'Refried Black Bean Cakes',
       img: 'https://spoonacular.com/recipeImages/263116-312x231.jpg',
-      description: 'refried black beans,',
+      description: 'These pan-fried cakes are crispy on the outside (thanks to a thin coating of cornmeal) and creamy in the center. They make an excellent vegetarian meal!',
       ingredients: 'Black Beans, Cornmeal',
       id: Math.random().toString()
     }

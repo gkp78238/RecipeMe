@@ -66,12 +66,12 @@
   border: solid 1px var(--light-accent-clay);
   border-radius: 5px;
   margin: 0;
-  color: #543435;
+  color: black;
   text-align: center;
   font-family: Inter;
   font-size: 10px;
   font-style: normal;
-  font-weight: 200;
+  font-weight: 360;
   line-height: normal;
 }
 
