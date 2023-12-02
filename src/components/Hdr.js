@@ -4,7 +4,7 @@ import Button from '../../src/components/Button';
 import LoginForm from './LoginForm';
 import './Hdr.css';
 
-const Hdr = ({ isAuth, onLoginSuccess, onLogout }) => {
+const Hdr = ({ isAuth, onLoginSuccess, onLogout, onLogin, onSignUp }) => {
   const [showLogin, setShowLogin] = useState(false);
 
   const loginButtonHandler = () => {
@@ -15,9 +15,14 @@ const Hdr = ({ isAuth, onLoginSuccess, onLogout }) => {
     setShowLogin(false);
   };
 
-  const loginSuccessHandler = () => {
-    onLoginSuccess(true);
+  const liftLoginDataHandler = (username, password) => {
     setShowLogin(false);
+    onLogin(username, password)
+  };
+
+  const liftSignUpDataHandler = (username, password) => {
+    setShowLogin(false);
+    onSignUp(username, password)
   };
 
   const signOutHandler = () => {
@@ -36,7 +41,7 @@ const Hdr = ({ isAuth, onLoginSuccess, onLogout }) => {
       {showLogin && (
         <div className="overlay">
           <div className="login-overlay">
-            <LoginForm onClose={closeLoginHandler} onLoginSuccess={loginSuccessHandler} />
+            <LoginForm onClose={closeLoginHandler} onLogin={liftLoginDataHandler} onSignUp={liftSignUpDataHandler}/>
           </div>
         </div>
       )}

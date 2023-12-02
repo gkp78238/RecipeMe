@@ -5,14 +5,22 @@ import logoImage from '../resources/logo (2).png';
 const LoginForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onLoginSuccess();
+
+    if (isSignUp === false) {
+      props.onLogin(username, password);
+    }
+
+    if (isSignUp === true) {
+      props.onSignUp(username, password);
+    }
   };
 
   const handleSignUp = () => {
-    console.log("Sign Up Clicked"); 
+    setIsSignUp((prevIsSignUp) => !prevIsSignUp);
   };
 
   return (
@@ -24,7 +32,7 @@ const LoginForm = (props) => {
         <img src={logoImage} alt="Logo" className="logo" />
 
         <p id="caption">
-          Sign in to generate your own recipe book using only what you have in your kitchen!
+          Sign in/up to generate your own recipe book using only what you have in your kitchen!
         </p>
         <form className="login-form" onSubmit={submitHandler}>
           <input
@@ -46,13 +54,26 @@ const LoginForm = (props) => {
             required
           />
           <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-            <button type="submit" className="login-button">
-              Login
-            </button>
-            {}
-            <button type="button" className="login-button" onClick={handleSignUp}>
-              Sign Up
-            </button>
+            {isSignUp ? (
+            <>
+              <button type="submit" className="login-button">
+                Sign Up
+              </button>
+              <button type="button" className="login-button" onClick={handleSignUp}>
+                Use an Existing Account?
+              </button>
+            </>
+          ) : (
+            <>
+              <button type="submit" className="login-button">
+                Login
+              </button>
+              <button type="button" className="login-button" onClick={handleSignUp}>
+                Create New Account?
+              </button>
+            </>
+          )
+}
           </div>
         </form>
       </div>

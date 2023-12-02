@@ -56,9 +56,55 @@ function RecipeMe() {
     console.log(users);
   };
 
-  const loginHandler = () => {
-    setLoggedIn((prevLoggedIn) => !prevLoggedIn);
+  const loginHandler = (username, password) => {
+    console.log('Attemped Username: ' + username);
+    console.log('Attempted Password: ' + password);
+    axios
+      .post('http://localhost:8080/api/accounts/login', {
+          name: username,
+          password: password
+      })
+      .then((res) => {
+        console.log(res);
+        console.log('Generating new Authentication Token...');
+
+        const accountId = res.data._id;
+        const new_token = 'Tasty' + Math.random().toString()
+
+        axios
+          .put('http://localhost:8080/api/accounts/' + accountId, {...res, auth_token: new_token})
+          .then(() => {
+            console.log(new_token);
+            localStorage.setItem("auth_token", new_token);
+            localStorage.setItem("accountId", accountId);
+            setLoggedIn(true)
+          })})
+          .catch((err) => {
+            console.log('Token Generation failed. ' + err.toString());
+            alert('Log in failed.');
+          })
+      .catch((err) => {alert('Log in failed.')});
   };
+
+  const signUpHandler = (username, password) => {
+    console.log('Attemped Username: ' + username);
+    console.log('Attempted Password: ' + password);
+
+    axios
+    .post('http://localhost:8080/api/accounts/', {
+        name: username,
+        password: password
+    })
+    .then(loginHandler(username, password))
+    .catch((err) => {alert('Signup failed.')});
+  };
+
+  const logOutHandler = () => {
+    localStorage.setItem("auth_token", null);
+    localStorage.setItem("accountId", null);
+    setLoggedIn(false)
+  };
+
         // Function to open the edit form with the user ID
         const openEditForm = (userId) => {
           setShowEditForm(true);
@@ -129,7 +175,7 @@ function getUsedIngredientsString(recipe) {
     }; 
     return (
       <div>
-        <Hdr isAuth={loggedIn} onLoginSuccess={() => setLoggedIn(true)} onLogout={() => setLoggedIn(false)} />
+        <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
         {loggedIn ? (
           <>
             <SearchRecipes onSearchWithIngredients={searchHandler} />
