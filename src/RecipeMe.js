@@ -104,25 +104,26 @@ function RecipeMe() {
     setLoggedIn(false)
   };
 
-        // Function to open the edit form with the user ID
-        const openEditForm = (userId) => {
-          setShowEditForm(true);
-          setEditUserId(userId);
-        };
-      
-        // Function to close the edit form
-        const closeEditForm = () => {
-          setShowEditForm(false);
-          setEditUserId(null);
-        };
-      
-        // Function to handle updating a user's information in the state
-        const handleUpdateUser = (updatedUser) => {
-          setUsers((prevUsers) =>
-            prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
-          );
-          closeEditForm();
-        };
+  const removeUserHandler = (userId) => {
+    setUsers((prevUsers) => prevUsers.filter(user => user.id !== userId));
+  };
+
+  const openEditForm = (userId) => {
+    setShowEditForm(true);
+    setEditUserId(userId);
+  };
+
+  const closeEditForm = () => {
+    setShowEditForm(false);
+    setEditUserId(null);
+  };
+
+  const handleUpdateUser = (updatedUser) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
+    );
+    closeEditForm();
+  };
 
   const searchHandler = (enteredUserData) => {
     const options = {
@@ -180,7 +181,7 @@ function RecipeMe() {
             <SearchRecipes onSearchWithIngredients={searchHandler} />
             <div style={{ display: 'flex' }}>
               <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
+              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
             </div>
             {showEditForm && (
               <EditForm
