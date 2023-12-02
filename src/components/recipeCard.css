@@ -5,6 +5,7 @@
     --light-item-peach: #edd8c8;
     --dark-item-orange: #efbea5; 
 }
+
 body{
     margin: 5;
     padding: 0; 
@@ -66,7 +67,7 @@ line-height: normal;
     border: solid 1px var(--light-accent-clay)  ;
     border-radius: 5px;
     margin:0;
-    color: #543435;
+    color: #543449;
 text-align: center;
 font-family: Inter;
 font-size: 10px;

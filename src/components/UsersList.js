@@ -1,5 +1,3 @@
-// UsersList.js
-
 import React, { useState } from 'react';
 import User from './User';
 import EditForm from './EditForm';
@@ -16,13 +14,11 @@ const UsersList = (props) => {
   };
 
   const handleRemoveClick = (userId) => {
-    // Handle the logic to remove the user, e.g., by calling a function passed through props
-    // props.onRemoveUser(userId);
+    props.onRemoveUser(userId);
   };
 
   const handleUpdateUser = (updatedUser) => {
-    // Handle the logic to update the user, e.g., by calling a function passed through props
-    // props.onUpdateUser(updatedUser);
+    props.onUpdateUser(updatedUser);
     setIsEditing(null);
   };
 
@@ -43,10 +39,10 @@ const UsersList = (props) => {
                 img={user.img}
                 ingredients={user.ingredients}
                 description={user.description}
-                onEdit={() => handleEditClick(user.id)} // Pass the onEdit callback to User component
-                onUpdate={handleUpdateUser} // Pass the onUpdate callback to User component
+                onEdit={() => handleEditClick(user.id)}
+                onUpdate={handleUpdateUser}
               />
-              <Button id={user.id} type="button" onClick={() => handleRemoveClick(user.id)}>
+              <Button type="button" onClick={() => handleRemoveClick(user.id)}>
                 Remove
               </Button>
               {isEditing === user.id && (
@@ -72,3 +68,4 @@ const UsersList = (props) => {
 };
 
 export default UsersList;
+
