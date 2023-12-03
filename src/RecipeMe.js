@@ -109,6 +109,8 @@ function RecipeMe() {
         });
    
   };
+
+  /*SAVE RECIPE TO COOKBOOK*/ 
   const saveRecipeHandler = (entryData) => {
     const recipeInQuestion = search.find(({ name }) => name === entryData.name);
     const newName = recipeInQuestion.username; 
@@ -157,7 +159,7 @@ function RecipeMe() {
         console.error('Failed to fetch account data:', error);
       });
   };
-  
+  /*remove Recipe From cookbook*/ 
   const removeUserHandler = (userId) => {
     setUsers((prevUsers) => prevUsers.filter(user => user.id !== userId));
     const accountId = localStorage.getItem("accountId");
