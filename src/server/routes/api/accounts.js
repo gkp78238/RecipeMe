@@ -1,6 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const router = express.Router();
+const bcryptjs = require('bcryptjs')
 
 const Account = require('../../models/Account');
 
@@ -17,14 +18,25 @@ router.get('/',(req, res) => {
 });
 
 router.post('/', bodyParser.json(), (req, res) => {
-    Account.create(req.body)
-    .then((item) => res.json({ msg: 'Account created successfully!' }))
-    .catch((err) => res.status(400).json({ error: 'Unable to add this account' }));
+    bcryptjs.hash(req.body.password, 8)
+    .then((hashed) => {
+        req.body.password = hashed;
+        
+        Account.create(req.body)
+        .then((item) => res.json({ msg: 'Account created successfully!' }))
+        .catch((err) => res.status(400).json({ error: 'Unable to add this account' }))}
+    );
 });
 
 router.post('/login', bodyParser.json(), (req, res) => {
-    Account.findOne({name: req.body.name, password: req.body.password})
-    .then((item) => res.json(item))
+    Account.findOne({name: req.body.name})
+    .then((item) => {
+        bcryptjs.compare(req.body.password, item.password)
+        .then((isMatch) => {
+            if (isMatch) res.json(item)
+            else res.status(400).json({ msg: 'Incorrect password' })}
+        )
+    })
     .catch((err) => res.status(400).json({ noaccountsfound: 'Unable to find account' }));
 });
 

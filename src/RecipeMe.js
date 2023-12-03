@@ -56,8 +56,8 @@ function RecipeMe() {
   };
 
   const loginHandler = (username, password) => {
-    console.log('Attemped Username: ' + username);
-    console.log('Attempted Password: ' + password);
+    //console.log('Attemped Username: ' + username);
+    //console.log('Attempted Password: ' + password);
     axios
       .post('http://localhost:8080/api/accounts/login', {
           name: username,
@@ -68,6 +68,7 @@ function RecipeMe() {
         console.log('Generating new Authentication Token...');
 
         const accountId = res.data._id;
+        const accountName = res.data.name;
         const new_token = 'Tasty' + Math.random().toString()
 
         axios
@@ -75,6 +76,7 @@ function RecipeMe() {
           .then(() => {
             console.log(new_token);
             localStorage.setItem("auth_token", new_token);
+            localStorage.setItem("accountName", accountName);
             localStorage.setItem("accountId", accountId);
             setLoggedIn(true)
           })})
@@ -86,15 +88,15 @@ function RecipeMe() {
   };
 
   const signUpHandler = (username, password) => {
-    console.log('Attemped Username: ' + username);
-    console.log('Attempted Password: ' + password);
+    //console.log('Attemped Username: ' + username);
+    //console.log('Attempted Password: ' + password);
 
     axios
     .post('http://localhost:8080/api/accounts/', {
         name: username,
         password: password
     })
-    .then(loginHandler(username, password))
+    .then(alert('Signup successful. \n\n Log in with your credentials to create your cookbook!'))
     .catch((err) => {alert('Signup failed.')});
   };
 

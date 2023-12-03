@@ -45,7 +45,7 @@ const Hdr = ({ isAuth, onLoginSuccess, onLogout, onLogin, onSignUp }) => {
           </div>
         </div>
       )}
-      {isAuth && <div>You are logged in!</div>}
+      {isAuth && <div>Logged in as <b><u>{localStorage.getItem("accountName")}</u></b>!</div>}
     </div>
   );
 };
