@@ -1,4 +1,5 @@
 .card {
+  width: fit-content;
   background: #fae1dd; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
@@ -6,10 +7,12 @@
   margin: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: center;
   transition: box-shadow 0.3s ease;
 }
-
+.users{
+  width:fit-content;
+}
 .card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

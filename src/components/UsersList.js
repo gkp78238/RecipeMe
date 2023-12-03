@@ -9,7 +9,7 @@ import divider from '../resources/Divider (1).png';
 const UsersList = (props) => {
   const [isEditing, setIsEditing] = useState(null);
 
-  const handleEditClick = (userId) => {
+  const startEditing = (userId) => {
     setIsEditing(userId);
   };
 
@@ -17,12 +17,12 @@ const UsersList = (props) => {
     props.onRemoveUser(userId);
   };
 
-  const handleUpdateUser = (updatedUser) => {
+  const updateUser = (updatedUser) => {
     props.onUpdateUser(updatedUser);
     setIsEditing(null);
   };
 
-  const handleCancelEdit = () => {
+  const cancelEditing = () => {
     setIsEditing(null);
   };
 
@@ -35,18 +35,20 @@ const UsersList = (props) => {
             <div key={user.id}>
               <User
                 id={user.id}
-                name={user.username}
+                username={user.username}
                 img={user.img}
                 ingredients={user.ingredients}
                 description={user.description}
-                onEdit={() => handleEditClick(user.id)}
-                onUpdate={handleUpdateUser}
+                onEdit={startEditing}
               />
+              <Button type="button" onClick={() => startEditing(user.id)}>
+                Edit
+              </Button>
               <Button type="button" onClick={() => handleRemoveClick(user.id)}>
                 Remove
               </Button>
               {isEditing === user.id && (
-                <EditForm user={user} onUpdate={handleUpdateUser} onCancel={handleCancelEdit} />
+                <EditForm user={user} onUpdateUser={updateUser} onCancel={cancelEditing} />
               )}
             </div>
           ))}

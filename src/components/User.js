@@ -1,4 +1,4 @@
-
+// User.js
 import React, { useState } from 'react';
 import './User.css';
 import EditForm from './EditForm';
@@ -6,17 +6,31 @@ import EditForm from './EditForm';
 const User = (props) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditClick = () => {
+  const startEditing = () => {
     setIsEditing(true);
   };
 
-  const handleCancelEdit = () => {
+  const cancelEditing = () => {
+    setIsEditing(false);
+  };
+
+  const updateUser = (updatedUser) => {
+    // Log the user before editing
+    console.log('User before editing:', props);
+
+    // Pass the updated user details to the parent component
+    props.onUpdateUser(updatedUser);
+
+    // Log the user after editing
+    console.log('User after editing:', updatedUser);
+
+    // Exit the edit mode
     setIsEditing(false);
   };
 
   return (
     <div className="recipeCard">
-      <h1 id="Title">{props.name}</h1>
+      <h1 id="Title">{props.username}</h1>
       <div className="card-content">
         <img src={props.img} alt={props.name} className="circle-image" />
 
@@ -32,17 +46,13 @@ const User = (props) => {
           <p className="ingredient">{props.ingredients}</p>
         </div>
 
-        {props.onEdit && (
-          // Only show the "Edit" button if the onEdit prop is provided
-          <>
-            {isEditing ? (
-              <EditForm user={props} onUpdate={props.onUpdate} onCancel={handleCancelEdit} />
-            ) : (
-              <button type="button" onClick={handleEditClick}>
-                Edit
-              </button>
-            )}
-          </>
+        {/* Render the EditForm when in edit mode */}
+        {isEditing && (
+          <EditForm
+            user={props}
+            onUpdateUser={updateUser}
+            onCancel={cancelEditing}
+          />
         )}
       </div>
     </div>
@@ -50,3 +60,4 @@ const User = (props) => {
 };
 
 export default User;
+

@@ -2,17 +2,22 @@
 import React, { useState } from 'react';
 import './EditForm.css';
 
-const EditForm = ({ user, onUpdate, onCancel }) => {
-  const [editedUser, setEditedUser] = useState({ ...user });
+const EditForm = ({ user, onUpdateUser, onCancel }) => {
+  const [updatedName, setUpdatedName] = useState(user.username);
+  const [updatedDescription, setUpdatedDescription] = useState(user.description);
+  const [updatedIngredients, setUpdatedIngredients] = useState(user.ingredients);
+  const [updatedImg, setUpdatedImg] = useState(user.img);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditedUser((prevUser) => ({ ...prevUser, [name]: value }));
-  };
+  const handleSubmit = () => {
+    const updatedUser = {
+      id: user.id,
+      username: updatedName,
+      description: updatedDescription,
+      ingredients: updatedIngredients,
+      img: updatedImg,
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onUpdate(editedUser);
+    onUpdateUser(updatedUser);
   };
 
   return (
@@ -24,19 +29,39 @@ const EditForm = ({ user, onUpdate, onCancel }) => {
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="name" value={editedUser.name} onChange={handleChange} />
+            <input
+              type="text"
+              name="name"
+              value={updatedName}
+              onChange={(e) => setUpdatedName(e.target.value)}
+            />
           </label>
           <label>
             Description:
-            <input type="text" name="description" value={editedUser.description} onChange={handleChange} />
+            <input
+              type="text"
+              name="description"
+              value={updatedDescription}
+              onChange={(e) => setUpdatedDescription(e.target.value)}
+            />
           </label>
           <label>
             Ingredients List:
-            <input type="text" name="ingredients" value={editedUser.ingredients} onChange={handleChange} />
+            <input
+              type="text"
+              name="ingredients"
+              value={updatedIngredients}
+              onChange={(e) => setUpdatedIngredients(e.target.value)}
+            />
           </label>
           <label>
             Image URL:
-            <input type="text" name="img" value={editedUser.img} onChange={handleChange} />
+            <input
+              type="text"
+              name="img"
+              value={updatedImg}
+              onChange={(e) => setUpdatedImg(e.target.value)}
+            />
           </label>
           <button type="submit">Save</button>
           <button type="button" onClick={onCancel}>

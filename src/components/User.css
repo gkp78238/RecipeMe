@@ -25,6 +25,7 @@
   border: 3px solid #c07b72;
   background: #fff9ef;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 #Title {
@@ -54,11 +55,9 @@
   height: 110px;
   border-radius: 99px;
   border: 1px solid #543435;
-  margin-right:10px;
 }
 
 .description {
-  margin: 10px;
   width: 250px; 
   flex-shrink: 0;
   height: min-content;
@@ -75,13 +74,8 @@
   line-height: normal;
 }
 
-#List Label {
-  margin: 0;
-  padding: 0;
-}
-
 #List-Label {
-  text-align: left; /* Change Left to left */
+  text-align: center; /* Change Left to left */
   margin: 0;
 }
 .ingredient{
@@ -90,6 +84,6 @@
 }
 .ingredient-section{
   width: 150px;
-  margin-left:15px;
+
   padding:0;
 }

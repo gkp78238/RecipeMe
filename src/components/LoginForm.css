@@ -21,7 +21,7 @@ body {
 .login-container {
     text-align:center;
     width: 335px;
-    height: 330px;
+    height: fit-content;
     padding: 10px;
     margin:20px;
     border: 2px solid var(--light-accent-clay);

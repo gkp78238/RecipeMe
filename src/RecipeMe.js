@@ -7,6 +7,7 @@ import axios from 'axios';
 import EditForm from './components/EditForm';
 
 function RecipeMe() {
+  
   const initialSearch = [
     {
       username: 'Black Bean Chocolate Cake',
@@ -37,23 +38,6 @@ function RecipeMe() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [editUserId, setEditUserId] = useState(null);
 
-  const saveRecipeHandler = (entryData) => {
-    const recipeInQuestion = search.find(({ username }) => username === entryData.name);
-
-    const newImage = recipeInQuestion.img;
-    const newIngredients = recipeInQuestion.ingredients;
-    const newDescription = recipeInQuestion.description; 
-    const userData = {
-      username: entryData.name,
-      img: newImage,
-      ingredients: newIngredients,
-      description: newDescription,
-      id: Math.random().toString()
-    };
-
-    setUsers((prevState) => [...prevState, userData]);
-    console.log(users);
-  };
 
   const loginHandler = (username, password) => {
     //console.log('Attemped Username: ' + username);
@@ -106,6 +90,56 @@ function RecipeMe() {
     setLoggedIn(false)
   };
 
+  const saveRecipeHandler = (entryData) => {
+    const recipeInQuestion = search.find(({ username }) => username === entryData.name);
+  
+    const newImage = recipeInQuestion.img;
+    const newIngredients = recipeInQuestion.ingredients;
+    const newDescription = recipeInQuestion.description; 
+    const userData = {
+      username: entryData.name,
+      img: newImage,
+      ingredients: newIngredients,
+      description: newDescription,
+      id: Math.random().toString()
+    };
+  
+    console.log('Saving Recipe. User Data:', userData);
+  
+    // Save the recipe to my_recipes array in the authenticated user's account
+    const accountId = localStorage.getItem("accountId");
+  
+    // Fetch the current account data
+    axios.get(`http://localhost:8080/api/accounts/${accountId}`)
+      .then((response) => {
+        const currentAccount = response.data;
+  
+        // Update my_recipes array
+        const updatedAccount = {
+          ...currentAccount,
+          my_recipes: [...currentAccount.my_recipes, userData],
+        };
+  
+        // Save the updated account data
+        axios.put(`http://localhost:8080/api/accounts/${accountId}`, updatedAccount)
+          .then(() => {
+            console.log('Recipe saved to my_recipes array.');
+            
+            // Log the updated my_recipes array content
+            console.log('Updated my_recipes array:', updatedAccount.my_recipes);
+  
+            // Now update the local state or trigger any other necessary actions
+            setUsers((prevState) => [...prevState, userData]);
+          })
+          .catch((error) => {
+            console.error('Failed to update account data:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Failed to fetch account data:', error);
+      });
+  };
+  
   const removeUserHandler = (userId) => {
     setUsers((prevUsers) => prevUsers.filter(user => user.id !== userId));
   };
@@ -175,35 +209,34 @@ function RecipeMe() {
       })
       .catch((error) => console.error(error)); 
     }; 
-    return (
-      <div>
-        <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
-        {loggedIn ? (
-          <>
-            <SearchRecipes onSearchWithIngredients={searchHandler} />
-            <div style={{ display: 'flex' }}>
-              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
-            </div>
-            {showEditForm && (
-              <EditForm
-                user={users.find((user) => user.id === editUserId)}
-                onUpdate={handleUpdateUser}
-                onCancel={closeEditForm}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            <div style={{ display: 'flex' }}>
-              <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
-            </div>
-          </>
-        )}
-      </div>
-    );
+   return (
+    <div>
+      <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
+      {loggedIn ? (
+        <>
+          <SearchRecipes onSearchWithIngredients={searchHandler} />
+          <div style={{ display: 'flex' }}>
+            <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
+          </div>
+          {showEditForm && (
+            <EditForm
+              user={users.find((user) => user.id === editUserId)}
+              onUpdateUser={handleUpdateUser}
+              onCancel={closeEditForm}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <div style={{ display: 'flex' }}>
+            <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default RecipeMe;
-

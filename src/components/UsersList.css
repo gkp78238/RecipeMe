@@ -7,11 +7,12 @@
 }
 
 .users {
+  text-align: center;
   flex: 100%; /* Change flex to 100% */
-  padding: 10px;
+  padding: 20px;
   margin: 2rem auto;
-  width: 90%;
-  max-width: 35rem;
+  width: fit-content;
+  max-width: fit-content;
   background-color: var(--dark-item-orange);
   border: 3px solid var(--light-accent-clay);
 }
