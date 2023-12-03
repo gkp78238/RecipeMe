@@ -112,17 +112,19 @@ function RecipeMe() {
 
   /*SAVE RECIPE TO COOKBOOK*/ 
   const saveRecipeHandler = (entryData) => {
+    console.log(entryData);
     const recipeInQuestion = search.find(({ name }) => name === entryData.name);
-    const newName = recipeInQuestion.username; 
-    const newImage = recipeInQuestion.img;
-    const newIngredients = recipeInQuestion.ingredients;
-    const newDescription =  recipeInQuestion.description;
+    const newName = entryData.username; 
+    const newImage = entryData.img;
+    const newIngredients = entryData.ingredients;
+    const newDescription =  entryData.description;
+    const newID = entryData.id;
     const userData = {
       username: newName,
       img: newImage,
       ingredients: newIngredients,
       description: newDescription,
-      id: Math.random().toString()
+      id: newID
     };
   
     // Save the recipe to my_recipes array in the authenticated user's account
@@ -140,7 +142,7 @@ function RecipeMe() {
         };
   
         // Save the updated account data
-        axios.post('http://localhost:8080/api/accounts/'+ accountId, updatedAccount)
+        axios.put('http://localhost:8080/api/accounts/'+ accountId, updatedAccount)
           .then(() => {
             console.log('Recipe saved to my_recipes array.');
   
@@ -175,9 +177,11 @@ function RecipeMe() {
         };
         const accountId = localStorage.getItem("accountId");
       const toPost = 'http://localhost:8080/api/accounts/' + accountId;
-        axios.post(toPost, updatedAccount)
+        axios.put(toPost, updatedAccount)
           .then(() => {
             console.log('User removed from my_recipes array.');
+            setMyRecipes(updatedAccount.my_recipes);
+            console.log('Updated my_recipes array:', updatedAccount.my_recipes);
           })
           .catch((error) => {
             console.error('Failed to update account data:', error);
@@ -203,7 +207,24 @@ function RecipeMe() {
     setUsers((prevUsers) =>
       prevUsers.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user))
     );
+    setMyRecipes((prevState) => prevState.map(recipe => (recipe.id === updatedUser.id ? updatedUser : recipe)));
     closeEditForm();
+  };
+  
+  const handleEditRecipe = (updatedRecipe) => {
+    // Implement the logic to update the my_recipes array
+    const updatedRecipes = myRecipes.map(recipe => (recipe.id === updatedRecipe.id ? updatedRecipe : recipe));
+    setMyRecipes(updatedRecipes);
+  
+    const accountId = localStorage.getItem("accountId");
+    axios.post('http://localhost:8080/api/accounts/' + accountId, { my_recipes: updatedRecipes })
+      .then(() => {
+        console.log('Recipe updated in my_recipes array.');
+        closeEditForm(); 
+      })
+      .catch((error) => {
+        console.error('Failed to update account data:', error);
+      });
   };
 
   const searchHandler = (enteredUserData) => {
@@ -262,15 +283,16 @@ function RecipeMe() {
           <>
             <SearchRecipes onSearchWithIngredients={searchHandler} />
             <div style={{ display: 'flex' }}>
-              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-              <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
+              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={handleEditRecipe} />
+              <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} onRemoveUser={removeUserHandler} onClose = {closeEditForm}/>
             </div>
             {showEditForm && (
-              <EditForm
-                user={users.find((user) => user.id === editUserId)}
-                onUpdateUser={handleUpdateUser}
-                onCancel={closeEditForm}
-              />
+            <EditForm
+            user={myRecipes.find((user) => user.id === editUserId)}
+            onUpdateUser={handleUpdateUser}
+            onCancel={closeEditForm}
+            onEdit={handleEditRecipe}n
+            />
             )}
           </>
         ) : (

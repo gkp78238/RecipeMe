@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import './EditForm.css';
 
-const EditForm = ({ user, onUpdateUser, onCancel }) => {
+const EditForm = ({ user, onUpdateUser, onCancel, myRecipes, onEdit, onClose }) => {
   const [updatedName, setUpdatedName] = useState(user.username);
   const [updatedDescription, setUpdatedDescription] = useState(user.description);
   const [updatedIngredients, setUpdatedIngredients] = useState(user.ingredients);
   const [updatedImg, setUpdatedImg] = useState(user.img);
-
   const handleSubmit = () => {
     const updatedUser = {
       id: user.id,
@@ -17,9 +16,14 @@ const EditForm = ({ user, onUpdateUser, onCancel }) => {
       img: updatedImg,
     };
 
+    // Call onUpdateUser to update in UsersList
     onUpdateUser(updatedUser);
-  };
 
+    // Call onEdit to update in RecipeMe
+    onEdit(updatedUser);
+   
+  
+  };
   return (
     <div className="overlay">
       <div className="modal">

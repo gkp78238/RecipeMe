@@ -32,7 +32,7 @@ const User = (props) => {
     <div className="recipeCard">
       <h1 id="Title">{props.username}</h1>
       <div className="card-content">
-        <img src={props.img} alt={props.name} className="circle-image" />
+        <img src={props.img} alt={props.username} className="circle-image" />
 
         <div>
           <h4 id="List-Label">Description</h4>

@@ -8,11 +8,11 @@ import Button from './Button';
 import divider from '../resources/Divider (1).png';
 
 const UsersList = (props) => {
-  const [isEditing, setIsEditing] = useState(null);
-  
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = (userId) => {
     setIsEditing(userId);
+    props.onEdit(userId)
   };
 
   const handleRemoveClick = (userId) => {
@@ -27,47 +27,49 @@ const UsersList = (props) => {
   const handleCancelEdit = () => {
     setIsEditing(null);
   };
+const renderRecipes = () => {
+    if (props.isAuth && props.myRecipes.length > 0) {
+      return props.myRecipes.map((recipe) => (
+        <div key={recipe.id}>
+          <User
+            id={recipe.id}
+            username={recipe.username}
+            img={recipe.img}
+            ingredients={recipe.ingredients}
+            description={recipe.description}
+          />
+          <Button type="button" onClick={() => handleEditClick(recipe.id)}>
+            Edit
+          </Button>
+          <Button type="button" onClick={() => handleRemoveClick(recipe.id)}>
+            Remove
+          </Button>
+          {isEditing === recipe.id && (
+            <EditForm
+              user={recipe}
+              onUpdate={handleUpdateUser}
+              onCancel={handleCancelEdit}
+              onEdit={props.onEdit}  // Pass the handleEditRecipe function
+              onClose={props.onClose}
+            />
+          )}
+        </div>
+      ));
+    } else {
+      return (
+        <p style={{ fontSize: '2rem', color: '#292929', display: 'inline', textDecoration: 'underline', fontWeight: 'bold' }}>
+          Log In to Add Cookbook Recipes
+        </p>
+      );
+    }
+  };
 
-  if (props.isAuth) {
-    return (
-      <Card className="users">
-        <>
-          <img src={divider} alt="browse recipes" className="divider"></img>
-          {props.myRecipes.map((user) => (
-            <div key={user.id}>
-              <User
-                id={user.id}
-                username={user.username}
-                img={user.img}
-                ingredients={user.ingredients}
-                description={user.description}
-              />
-              <Button type="button" onClick={() => handleEditClick(user.id)}>
-                Edit
-              </Button>
-              <Button type="button" onClick={() => handleRemoveClick(user.id)}>
-                Remove
-              </Button>
-              {isEditing === user.id && (
-                <EditForm user={user} onUpdate={handleUpdateUser} onCancel={handleCancelEdit} />
-              )}
-            </div>
-          ))}
-        </>
-      </Card>
-    );
-  } else {
-    return (
-      <Card className="users">
-        <>
-          <img src={divider} alt="browse recipes" className="divider"></img>
-          <p style={{ fontSize: '2rem', color: '#292929', display: 'inline', textDecoration: 'underline', fontWeight: 'bold' }}>
-            Log In to Add Cookbook Recipes
-          </p>
-        </>
-      </Card>
-    );
-  }
+  return (
+    <Card className="users">
+      <img src={divider} alt="browse recipes" className="divider" />
+      {renderRecipes()}
+    </Card>
+  );
 };
 
 export default UsersList;

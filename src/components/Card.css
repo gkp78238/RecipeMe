@@ -11,7 +11,7 @@
   transition: box-shadow 0.3s ease;
 }
 .users{
-  width:fit-content;
+  width:40%;
 }
 .card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
