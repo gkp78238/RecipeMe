@@ -37,6 +37,7 @@ function RecipeMe() {
   const [users, setUsers] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
   const [editUserId, setEditUserId] = useState(null);
+  const [myRecipes, setMyRecipes] = useState([]);
 
 
   const loginHandler = (username, password) => {
@@ -52,6 +53,7 @@ function RecipeMe() {
         console.log('Generating new Authentication Token...');
 
         const accountId = res.data._id;
+        console.log(accountId);
         const accountName = res.data.name;
         const new_token = 'Tasty' + Math.random().toString()
 
@@ -62,8 +64,11 @@ function RecipeMe() {
             localStorage.setItem("auth_token", new_token);
             localStorage.setItem("accountName", accountName);
             localStorage.setItem("accountId", accountId);
-            setLoggedIn(true)
-          })})
+            setLoggedIn(true);
+            console.log("login sucess!");
+            fetchMyRecipes();
+          })
+        })
           .catch((err) => {
             console.log('Token Generation failed. ' + err.toString());
             alert('Log in failed.');
@@ -87,30 +92,42 @@ function RecipeMe() {
   const logOutHandler = () => {
     localStorage.setItem("auth_token", null);
     localStorage.setItem("accountId", null);
-    setLoggedIn(false)
+    setLoggedIn(false); 
+    setMyRecipes([]);
   };
-
+  const fetchMyRecipes = () => {
+    
+      const accountId = localStorage.getItem("accountId");
+      axios.get('http://localhost:8080/api/accounts/' + accountId)
+        .then((response) => {
+          const currentAccount = response.data;
+          setMyRecipes(currentAccount.my_recipes);
+          console.log('my_recipes array:', response.my_recipes);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch account data:', error);
+        });
+   
+  };
   const saveRecipeHandler = (entryData) => {
-    const recipeInQuestion = search.find(({ username }) => username === entryData.name);
-  
+    const recipeInQuestion = search.find(({ name }) => name === entryData.name);
+    const newName = recipeInQuestion.username; 
     const newImage = recipeInQuestion.img;
     const newIngredients = recipeInQuestion.ingredients;
-    const newDescription = recipeInQuestion.description; 
+    const newDescription =  recipeInQuestion.description;
     const userData = {
-      username: entryData.name,
+      username: newName,
       img: newImage,
       ingredients: newIngredients,
       description: newDescription,
       id: Math.random().toString()
     };
   
-    console.log('Saving Recipe. User Data:', userData);
-  
     // Save the recipe to my_recipes array in the authenticated user's account
     const accountId = localStorage.getItem("accountId");
   
     // Fetch the current account data
-    axios.get(`http://localhost:8080/api/accounts/${accountId}`)
+    axios.get('http://localhost:8080/api/accounts/' + accountId)
       .then((response) => {
         const currentAccount = response.data;
   
@@ -121,15 +138,16 @@ function RecipeMe() {
         };
   
         // Save the updated account data
-        axios.put(`http://localhost:8080/api/accounts/${accountId}`, updatedAccount)
+        axios.post('http://localhost:8080/api/accounts/${accountId}', updatedAccount)
           .then(() => {
             console.log('Recipe saved to my_recipes array.');
-            
+  
             // Log the updated my_recipes array content
             console.log('Updated my_recipes array:', updatedAccount.my_recipes);
   
-            // Now update the local state or trigger any other necessary actions
+            // Update the local state or trigger any other necessary actions
             setUsers((prevState) => [...prevState, userData]);
+            setMyRecipes(updatedAccount.my_recipes); // Update my_recipes state
           })
           .catch((error) => {
             console.error('Failed to update account data:', error);
@@ -209,34 +227,35 @@ function RecipeMe() {
       })
       .catch((error) => console.error(error)); 
     }; 
-   return (
-    <div>
-      <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
-      {loggedIn ? (
-        <>
-          <SearchRecipes onSearchWithIngredients={searchHandler} />
-          <div style={{ display: 'flex' }}>
-            <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
-          </div>
-          {showEditForm && (
-            <EditForm
-              user={users.find((user) => user.id === editUserId)}
-              onUpdateUser={handleUpdateUser}
-              onCancel={closeEditForm}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          <div style={{ display: 'flex' }}>
-            <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
-            <UsersList isAuth={loggedIn} items={users} onEdit={openEditForm} />
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
 
-export default RecipeMe;
+    return (
+      <div>
+        <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
+        {loggedIn ? (
+          <>
+            <SearchRecipes onSearchWithIngredients={searchHandler} />
+            <div style={{ display: 'flex' }}>
+              <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+              <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} onRemoveUser={removeUserHandler} />
+            </div>
+            {showEditForm && (
+              <EditForm
+                user={users.find((user) => user.id === editUserId)}
+                onUpdateUser={handleUpdateUser}
+                onCancel={closeEditForm}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            <div style={{ display: 'flex' }}>
+              <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
+              <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} />
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+  
+  export default RecipeMe;

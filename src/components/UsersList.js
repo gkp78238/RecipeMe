@@ -1,3 +1,4 @@
+// UsersList.js
 import React, { useState } from 'react';
 import User from './User';
 import EditForm from './EditForm';
@@ -9,7 +10,7 @@ import divider from '../resources/Divider (1).png';
 const UsersList = (props) => {
   const [isEditing, setIsEditing] = useState(null);
 
-  const startEditing = (userId) => {
+  const handleEditClick = (userId) => {
     setIsEditing(userId);
   };
 
@@ -17,12 +18,12 @@ const UsersList = (props) => {
     props.onRemoveUser(userId);
   };
 
-  const updateUser = (updatedUser) => {
+  const handleUpdateUser = (updatedUser) => {
     props.onUpdateUser(updatedUser);
     setIsEditing(null);
   };
 
-  const cancelEditing = () => {
+  const handleCancelEdit = () => {
     setIsEditing(null);
   };
 
@@ -31,7 +32,7 @@ const UsersList = (props) => {
       <Card className="users">
         <>
           <img src={divider} alt="browse recipes" className="divider"></img>
-          {props.items.map((user) => (
+          {props.myRecipes.map((user) => (
             <div key={user.id}>
               <User
                 id={user.id}
@@ -39,16 +40,15 @@ const UsersList = (props) => {
                 img={user.img}
                 ingredients={user.ingredients}
                 description={user.description}
-                onEdit={startEditing}
               />
-              <Button type="button" onClick={() => startEditing(user.id)}>
+              <Button type="button" onClick={() => handleEditClick(user.id)}>
                 Edit
               </Button>
               <Button type="button" onClick={() => handleRemoveClick(user.id)}>
                 Remove
               </Button>
               {isEditing === user.id && (
-                <EditForm user={user} onUpdateUser={updateUser} onCancel={cancelEditing} />
+                <EditForm user={user} onUpdate={handleUpdateUser} onCancel={handleCancelEdit} />
               )}
             </div>
           ))}
@@ -70,4 +70,3 @@ const UsersList = (props) => {
 };
 
 export default UsersList;
-
