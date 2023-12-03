@@ -102,7 +102,7 @@ function RecipeMe() {
         .then((response) => {
           const currentAccount = response.data;
           setMyRecipes(currentAccount.my_recipes);
-          console.log('my_recipes array:', response.my_recipes);
+          console.log('my_recipes array:', currentAccount.my_recipes);
         })
         .catch((error) => {
           console.error('Failed to fetch account data:', error);
@@ -138,7 +138,7 @@ function RecipeMe() {
         };
   
         // Save the updated account data
-        axios.post('http://localhost:8080/api/accounts/${accountId}', updatedAccount)
+        axios.post('http://localhost:8080/api/accounts/'+ accountId, updatedAccount)
           .then(() => {
             console.log('Recipe saved to my_recipes array.');
   
@@ -160,6 +160,31 @@ function RecipeMe() {
   
   const removeUserHandler = (userId) => {
     setUsers((prevUsers) => prevUsers.filter(user => user.id !== userId));
+    const accountId = localStorage.getItem("accountId");
+    axios.get('http://localhost:8080/api/accounts/' + accountId)
+      .then((response) => {
+        const currentAccount = response.data;
+
+  
+        // Update my_recipes array in the backend
+        const updatedAccount = {
+          ...currentAccount,
+          my_recipes: currentAccount.my_recipes.filter(recipe => recipe.id !== userId),
+        };
+        const accountId = localStorage.getItem("accountId");
+      const toPost = 'http://localhost:8080/api/accounts/' + accountId;
+        axios.post(toPost, updatedAccount)
+          .then(() => {
+            console.log('User removed from my_recipes array.');
+          })
+          .catch((error) => {
+            console.error('Failed to update account data:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Failed to fetch account data:', error);
+      });
+  
   };
 
   const openEditForm = (userId) => {
