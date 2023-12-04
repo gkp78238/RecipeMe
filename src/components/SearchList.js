@@ -3,7 +3,7 @@ import User from './User';
 import './UsersList.css';
 import Card from './Card';
 import Button from './Button';
-import divider from '../resources/Divider.png';
+import divider from '../resources/Divider (4).png';
 
 const SearchList = (props) => {
   const { isAuth, items, onSaveRecipe } = props;
