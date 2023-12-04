@@ -118,7 +118,7 @@ function RecipeMe() {
     const newImage = entryData.img;
     const newIngredients = entryData.ingredients;
     const newDescription =  entryData.description;
-    const newID = entryData.id;
+    const newID = Math.random().toString();
     const userData = {
       username: newName,
       img: newImage,
@@ -216,15 +216,28 @@ function RecipeMe() {
     const updatedRecipes = myRecipes.map(recipe => (recipe.id === updatedRecipe.id ? updatedRecipe : recipe));
     setMyRecipes(updatedRecipes);
   
+    console.log("Updating database recipes...");
+
     const accountId = localStorage.getItem("accountId");
-    axios.post('http://localhost:8080/api/accounts/' + accountId, { my_recipes: updatedRecipes })
-      .then(() => {
-        console.log('Recipe updated in my_recipes array.');
-        closeEditForm(); 
+
+    axios.get('http://localhost:8080/api/accounts/' + accountId)
+      .then((res) => {
+        res.data.my_recipes = updatedRecipes;
+        
+        axios.put('http://localhost:8080/api/accounts/' + accountId, res.data)
+        .then(() => {
+          console.log('Recipe updated in my_recipes array.');
+          closeEditForm(); 
+        })
+        .catch((error) => {
+          console.error('Failed to update account data:', error);
+          closeEditForm(); 
+        });
       })
       .catch((error) => {
-        console.error('Failed to update account data:', error);
-      });
+        console.error('Failed to get account data to update:', error);
+        closeEditForm(); 
+      })    
   };
 
   const searchHandler = (enteredUserData) => {

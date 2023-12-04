@@ -28,7 +28,7 @@ const UsersList = (props) => {
     setIsEditing(null);
   };
 const renderRecipes = () => {
-    if (props.isAuth && props.myRecipes.length > 0) {
+    if (props.isAuth || props.myRecipes.length > 0) {
       return props.myRecipes.map((recipe) => (
         <div key={recipe.id}>
           <User
