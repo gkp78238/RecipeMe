@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from './Card';
 import Button from './Button';
 import './SearchRecipes.css';
-import divider from '../resources/Divider.png';
+import logo from '../resources/logo (4).png';
 
 const SearchRecipes = (props) => {
   const [enteredName, setEnteredName] = useState('');
@@ -38,6 +38,7 @@ const SearchRecipes = (props) => {
 
   return (
     <div className="search-bar">
+        <img src= {logo} alt = "RecipeMe!" className="logo"/>
          <p id= "search-inst">Instructions: Type a comma-separated list of ingredients to include them in your recipe search
           (e.g. "Apples, Flour, Sugar")</p>
       <div id="search form">

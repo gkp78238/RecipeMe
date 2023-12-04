@@ -7,11 +7,12 @@
 }
 
 .input {
-
+  color: #fff9ef;
+  background-color: #c07b72;
   margin: 2rem auto;
   padding: 1rem;
-  width: 90%;
-  max-width: 100rem;
+  width: 50%;
+  max-width: 90rem;
 }
 
 label {
@@ -41,17 +42,21 @@ flex-shrink: 0;
 }
 #search-button{
 background-color: var(--dark-accent-brown);
+text-align: center;
+
 }
 .search-bar{
+
   margin:5px;
   padding:20px;
 border-radius: 10px;
   text-align: center;
-  background-image: '../resources/bread-pattern.jpg';
+  background-color: var(--background-cream);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 3px solid var(--dark-accent-brown);
 }
 #search-inst{
-  color: var(--dark-accent-brown)
+  color: var(--dark-accent-brown); 
 }
 #search-form{
   display: flex;
@@ -73,4 +78,14 @@ border-radius: 10px;
   margin: 5;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
+}
+#ingredients{
+  color:#edd8c8; 
+  background-color: #c07b72;
+  border:1px solid var(--dark-accent-brown); 
+}
+.logo{
+  width: 200px;
+  margin:3px;
+padding:0;
 }
