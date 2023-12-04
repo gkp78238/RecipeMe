@@ -294,7 +294,6 @@ function RecipeMe() {
         <Hdr isAuth={loggedIn} onLogin={loginHandler} onSignUp={signUpHandler} onLogout={logOutHandler} />
         {loggedIn ? (
           <>
-            <SearchRecipes onSearchWithIngredients={searchHandler} />
             <div style={{ display: 'flex' }}>
               <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={handleEditRecipe} />
               <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} onRemoveUser={removeUserHandler} onClose = {closeEditForm}/>
@@ -310,6 +309,7 @@ function RecipeMe() {
           </>
         ) : (
           <>
+            <SearchRecipes onSearchWithIngredients={searchHandler} />
             <div style={{ display: 'flex' }}>
               <SearchList isAuth={loggedIn} items={initialSearch} onSaveRecipe={saveRecipeHandler} onEdit={openEditForm} />
               <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} />
