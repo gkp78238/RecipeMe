@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Button from '../../src/components/Button';
 import LoginForm from './LoginForm';
 import './Hdr.css';
+import logo from '../resources/logo (3).png'
 
 const Hdr = ({ isAuth, onLoginSuccess, onLogout, onLogin, onSignUp }) => {
   const [showLogin, setShowLogin] = useState(false);
@@ -32,7 +33,7 @@ const Hdr = ({ isAuth, onLoginSuccess, onLogout, onLogin, onSignUp }) => {
 
   return (
     <div className="hdr">
-      <h1>RecipeMe!</h1>
+      <img src ={logo} alt="RecipeMe!" className="logo"/>
       {isAuth ? (
         <Button onClick={signOutHandler}>Sign Out</Button>
       ) : (
