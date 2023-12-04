@@ -5,7 +5,7 @@ import EditForm from './EditForm';
 import './UsersList.css';
 import Card from './Card';
 import Button from './Button';
-import divider from '../resources/Divider (1).png';
+import divider from '../resources/Divider(1).png';
 
 const UsersList = (props) => {
   const [isEditing, setIsEditing] = useState(false);
