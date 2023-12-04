@@ -44,15 +44,7 @@ const renderRecipes = () => {
           <Button type="button" onClick={() => handleRemoveClick(recipe.id)}>
             Remove
           </Button>
-          {isEditing === recipe.id && (
-            <EditForm
-              user={recipe}
-              onUpdate={handleUpdateUser}
-              onCancel={handleCancelEdit}
-              onEdit={props.onEdit}  // Pass the handleEditRecipe function
-              onClose={props.onClose}
-            />
-          )}
+        
         </div>
       ));
     } else {
