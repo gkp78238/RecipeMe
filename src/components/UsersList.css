@@ -38,3 +38,20 @@
 .divider{
   max-width: 100%;
 }
+.addButton{
+  width: 85px;
+  height: 44px;
+  flex-shrink: 0;
+  color: #fff9ef;
+  border: 3px solid #fff9ef;
+  border-radius: 10px;
+  background: #c07b72;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 5;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

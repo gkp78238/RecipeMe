@@ -239,6 +239,44 @@ function RecipeMe() {
         closeEditForm(); 
       })    
   };
+  
+  const addRecipeHandler = (newRecipe) => {
+ 
+  
+    // Save the recipe to my_recipes array in the authenticated user's account
+    const accountId = localStorage.getItem("accountId");
+  
+    // Fetch the current account data
+    axios.get('http://localhost:8080/api/accounts/' + accountId)
+      .then((response) => {
+        const currentAccount = response.data;
+  
+        // Update my_recipes array
+        const updatedAccount = {
+          ...currentAccount,
+          my_recipes: [...currentAccount.my_recipes, newRecipe],
+        };
+  
+        // Save the updated account data
+        axios.put('http://localhost:8080/api/accounts/'+ accountId, updatedAccount)
+          .then(() => {
+            console.log('Recipe saved to my_recipes array.');
+  
+            // Log the updated my_recipes array content
+            console.log('Updated my_recipes array:', updatedAccount.my_recipes);
+  
+            // Update the local state or trigger any other necessary actions
+            setUsers((prevState) => [...prevState, newRecipe]);
+            setMyRecipes(updatedAccount.my_recipes); // Update my_recipes state
+          })
+          .catch((error) => {
+            console.error('Failed to update account data:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Failed to fetch account data:', error);
+      });
+  };
 
   const searchHandler = (enteredUserData) => {
     const options = {
@@ -297,7 +335,9 @@ function RecipeMe() {
             <SearchRecipes onSearchWithIngredients={searchHandler} />
             <div style={{ display: 'flex' }}>
               <SearchList isAuth={loggedIn} items={search} onSaveRecipe={saveRecipeHandler} onEdit={handleEditRecipe} />
-              <UsersList isAuth={loggedIn} items={users} myRecipes={myRecipes} onEdit={openEditForm} onRemoveUser={removeUserHandler} onClose = {closeEditForm}/>
+              <UsersList isAuth={loggedIn} items={users} 
+              myRecipes={myRecipes} onEdit={openEditForm} 
+              onRemoveUser={removeUserHandler} onAdd = {addRecipeHandler} onClose = {closeEditForm}/>
             </div>
             {showEditForm && (
             <EditForm

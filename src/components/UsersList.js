@@ -27,6 +27,18 @@ const UsersList = (props) => {
   const handleCancelEdit = () => {
     setIsEditing(null);
   };
+  const addRecipeHandler = () => {
+    const newUser = {
+      id: Math.random().toString(), 
+      username: "New Recipe",
+      ingredients: "Add ingredients...", 
+      description: "Add Description", 
+      img: ''
+     
+    }
+    props.onAdd(newUser);
+    renderRecipes();
+  }
 const renderRecipes = () => {
     if (props.isAuth || props.myRecipes.length > 0) {
       return props.myRecipes.map((recipe) => (
@@ -59,6 +71,7 @@ const renderRecipes = () => {
   return (
     <Card className="users">
       <img src={divider} alt="browse recipes" className="divider" />
+      <button type="button" onClick={addRecipeHandler} className="addButton">Add New Recipe</button>
       {renderRecipes()}
     </Card>
   );

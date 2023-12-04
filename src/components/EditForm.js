@@ -67,8 +67,8 @@ const EditForm = ({ user, onUpdateUser, onCancel, myRecipes, onEdit, onClose }) 
               onChange={(e) => setUpdatedImg(e.target.value)}
             />
           </label>
-          <button type="submit">Save</button>
-          <button type="button" onClick={onCancel}>
+          <button type="submit" className= "saveBtn">Save</button>
+          <button type="button" className="cancelBtn" onClick={onCancel}>
             Cancel
           </button>
         </form>
