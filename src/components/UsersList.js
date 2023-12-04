@@ -71,7 +71,9 @@ const renderRecipes = () => {
   return (
     <Card className="users">
       <img src={divider} alt="browse recipes" className="divider" />
+     {props.isAuth && (
       <button type="button" onClick={addRecipeHandler} className="addButton">Add New Recipe</button>
+     ) }
       {renderRecipes()}
     </Card>
   );
